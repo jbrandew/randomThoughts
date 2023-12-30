@@ -1,0 +1,80 @@
+so, we have an approach to min # the number of max cliques
+we have a calculator for the # of cliques containing each # of edges 
+
+what did we originally want? 
+
+we wanted the min graph size to gurantee a clique of a certain size 
+
+problem: 
+in approach for adding edges to minimize max clique size, we didnt account for the case where the two lists correspond to nodes that are already neighbors 
+we have now accounted for that correctly :D 
+
+okay. now...follwow original procedure
+
+so, procedure: 
+you have n nodes 
+you are going to add ceil(n*(n-1)/4) edges to this graph 
+follow the outlined procedure to add these edges 
+
+calculate the # of each subgraphs with each # of edges 
+
+find the min n (so graph size) at which there is a subgraph that has edges = small n* small n -1 /2
+
+okay, so execute. try with test case of R[4] = 18 and R[3] = 6. As well as boundary case. 
+As in:
+1. take the graph of 5 nodes 
+2. follow policy of adding ceil(5*4/4) edges 
+3. look at subgraphs # of edges distribution 
+4. look at max # of edges in subgraph
+5. repeat for 6 nodes, see if there is then a subgraph fully connected of size 3. 
+
+problem: 
+count subgraphs method only works for the basic adj list type we had
+need to either:
+-convert input list of nodes into basic adj list 
+or
+-change behavior to work with list of nodes instead 
+
+problem: 
+in the basic 5 node problem, it has been shown that we are not giving a good solution
+
+worse: 
+it is following the original policy, but it is not giving the solution with the least amount of cliques...so the approach itself is wrong. 
+
+okay, so function works as intended. It provides a way to output a distribution of edges that 
+minimizes the # of edges in each subgraph 
+next steps: 
+-could show experimentally it gives us the min # of each type of sub graph...
+-could get method for getting the complement adj list. then examine that with the 
+ 
+ 
+in the case of subgraphs of size 4, with nodes 18...
+-if we have a subgraph with 4*3/2 = 6 edges -> complete clique 
+
+okay. i think we are close. 
+so, i do think this mehtod produces the arrangement with the smallest # of high # of edges in subgraphs. so, smallest # of near-cliques. 
+
+however, it doesnt interact completely like i thought with the complement. 
+we could, however. possibly just apply this method to either side of the argument... like...
+use the function on both building the complement and the original one equally. 
+so, adding an edge in one case prevents the complement from being able to add it. 
+
+yea do it :D 
+
+aight it still doesnt work.
+uhh, so like. what could be going wrong? maybe...hmmm...need to sort somehow by the 
+complement graphs stuff as well? 
+or, there just might be something wrong with the implementation. 
+
+
+what does minimizing the # of big cliques really mean to do...
+and is this approach good? it may be minimizing overall connectedness instead of minimizing the max clique size. 
+
+uhhh...maybe try like...weighting a possibility by how many edges there are in the opposite
+graph as well? 
+
+
+
+
+
+
