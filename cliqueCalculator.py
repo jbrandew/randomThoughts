@@ -23,6 +23,17 @@ def get_index_combinations(n, size):
     return index_combinations
 
 
+def create_nodes(adjacency_lists):
+    nodes = []
+    
+    for index, adj_list in enumerate(adjacency_lists):
+        node = Node(index)
+        node.adjList.update(adj_list)
+        nodes.append(node)
+    
+    return nodes
+
+
 def count_subgraphs(graph, subgraphSize):
     """
     Input: 
@@ -105,7 +116,7 @@ def getGraphComplement(graphIn):
     """
 
     #create list of nodes as adjacency list 
-    complementGraph = [Node(nodeInd) for nodeInd in range(numNodes)]  
+    complementGraph = [Node(nodeInd) for nodeInd in range(len(graphIn))]  
     
     #for each node to return 
     for node in complementGraph: 
@@ -153,8 +164,7 @@ def getComplementBalancedGoodAdjList(numNodes):
     #iterate while not empty. First set of edges will empty first. 
     #alternating which graph goes first slightly improves results 
 
-    while(len(edgesToAddGraph1) is not 0): 
-
+    while(len(edgesToAddGraph1) != 0): 
 
         #first, order the edges based on max size of adj list based on each pair
 
@@ -285,25 +295,53 @@ def getGoodAdjList(numNodes, numEdgesToAdd):
     
     return nodeList 
 
+
+
+#for node in graph: 
+#    print(node)
+
+
 #what are we doing? Testing basic cases of ramsey numbers with this. 
-numNodes = 17
+numNodes = 18
 numSizeSubgraph = 4
-numEdgesInClique = numSizeSubgraph*(numSizeSubgraph-1)/2  
+numEdgesInClique = numSizeSubgraph*(numSizeSubgraph-1)/2 
+numEdgesToAdd = int(np.ceil(numNodes*(numNodes-1)/4)) 
+
+adjList1, adjList2 = getComplementBalancedGoodAdjList(numNodes)
+
+print("Num edges in each subgraph of size 4")
+print(count_subgraphs(adjList1, numSizeSubgraph))
+print(count_subgraphs(adjList2, numSizeSubgraph))
+
+
+# adjList = getGoodAdjListModified(numNodes, numEdgesToAdd)
+# compAdjList = getGraphComplement(adjList) 
+
+# print("Num edges in each subgraph of size 4")
+# print(count_subgraphs(adjList,numSizeSubgraph))
+# print(count_subgraphs(compAdjList, numSizeSubgraph))
+
 
 # numEdgesRequired = int(np.ceil(numNodes*(numNodes-1)/4))
 # goodAdjList = getGoodAdjListModified(numNodes, numEdgesRequired)
 # comp = getGraphComplement(goodAdjList)
 
-g1, g2 = getComplementBalancedGoodAdjList(numNodes)
+# g1, g2 = getComplementBalancedGoodAdjList(numNodes)
 
-result1 = count_subgraphs(g1, numSizeSubgraph)
-print(result1) 
+# result1 = count_subgraphs(g1, numSizeSubgraph)
+# print(result1) 
 
-result2 = count_subgraphs(g2, numSizeSubgraph)
-print(result2) 
+# result2 = count_subgraphs(g2, numSizeSubgraph)
+# print(result2) 
 
-print("Number Edges in Full Clique")
-print(numEdgesInClique)
+# print("Number Edges in Full Clique")
+# print(numEdgesInClique)
+
+
+
+
+
+
 
 #get the # of edges in each subgraph for each 
 #so this gets the number of edges in each subgraph of size 4 

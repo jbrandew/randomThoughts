@@ -101,4 +101,19 @@ return nodeList
             if(len(adjListSizes) > 2): 
                 break  
             subList = subList + [nodeList[subListNodeInd]] 
+
+
+adjacency_lists = [
+    [1, 2, 3, 4,5],  # Node 0
+    [0],              # Node 1
+    [0],              # Node 2
+    [0],              # Node 3
+    [0],              # Node 4
+    [0]               # Node 5
+]
+
+graph = create_nodes(adjacency_lists)
+stuff = count_subgraphs(graph,3)
+print(stuff)
+
             
